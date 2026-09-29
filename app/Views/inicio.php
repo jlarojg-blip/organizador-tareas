@@ -7,6 +7,8 @@
 
     <title>Organizador de tareas</title>
 </head>
+
+
 <body>
     <nav class="navbar bg-light border-bottom">
     <div class="container">
@@ -20,5 +22,20 @@
         <h1 id="titulo">Organizador de tareas escolares</h1>
         <p id="mensaje">Bienvenido al sistema.</p>
     </main>
+
+    <script>
+    function cambiarIdioma(idioma) {
+        const titulo = document.getElementById('titulo');
+        const mensaje = document.getElementById('mensaje');
+
+        if (idioma === 'en') {
+            titulo.textContent = 'School Tasks Organizer';
+            mensaje.textContent = 'Welcome to the system.';
+        } else {
+            titulo.textContent = 'Organizador de tareas escolares';
+            mensaje.textContent = 'Bienvenido al sistema.';
+        }
+    }
+</script>
 </body>
 </html>
