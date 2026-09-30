@@ -23,13 +23,8 @@
         <p id="mensaje">Bienvenido al sistema.</p>
 
         <div class="mt-4">
-    <button id="login-button" type="button" class="btn btn-primary me-2">
-        Iniciar sesión
-    </button>
-
-    <button id="signup-button" type="button" class="btn btn-outline-primary">
-        Registrarse
-    </button>
+    <a id="login-button" href="/login" class="btn btn-primary">Iniciar sesión</a>
+<a id="signup-button" href="/registro" class="btn btn-primary">Registrarse</a>
 </div>
     </main>
 
