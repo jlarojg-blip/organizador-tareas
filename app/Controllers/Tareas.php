@@ -47,4 +47,13 @@ public function detalle($id)
 
     return view('tarea_detalle', ['tarea' => $tarea]);
 }
+
+public function eliminar($id)
+{
+    $modelo = new TareaModel();
+    $modelo->delete($id);
+
+    return redirect()->to(site_url('tareas'));
+}
+
 }
