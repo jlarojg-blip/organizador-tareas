@@ -14,5 +14,26 @@ class Tareas extends BaseController
         return view('tareas', [
             'tareas' => $tareas,
         ]);
+
     }
+
+    public function nueva()
+{
+    return view('tarea_nueva');
+}
+
+public function guardar()
+{
+    $modelo = new TareaModel();
+
+    $modelo->insert([
+        'titulo' => $this->request->getPost('titulo'),
+        'descripcion' => $this->request->getPost('descripcion'),
+        'fecha_entrega' => $this->request->getPost('fecha_entrega'),
+        'estado' => 'Pendiente',
+    ]);
+
+    return redirect()->to(site_url('tareas'));
+}
+
 }
