@@ -36,4 +36,15 @@ public function guardar()
     return redirect()->to(site_url('tareas'));
 }
 
+public function detalle($id)
+{
+    $modelo = new TareaModel();
+    $tarea = $modelo->find($id);
+
+    if (!$tarea) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    }
+
+    return view('tarea_detalle', ['tarea' => $tarea]);
+}
 }
