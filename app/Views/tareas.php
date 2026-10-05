@@ -28,7 +28,12 @@
                     <?php foreach ($tareas as $tarea): ?>
                         <tr>
                             <td><?= esc($tarea['id']) ?></td>
-                            <td><?= esc($tarea['titulo']) ?></td>
+                            <td>
+    <a href="<?= site_url('tareas/' . $tarea['id']) ?>">
+        <?= esc($tarea['titulo']) ?>
+    </a>
+</td>
+
                             <td><?= esc($tarea['fecha_entrega']) ?></td>
                             <td><?= esc($tarea['estado']) ?></td>
                         </tr>
