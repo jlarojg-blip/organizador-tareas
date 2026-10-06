@@ -23,7 +23,7 @@
         </div>
 
         <a href="<?= site_url('tareas') ?>" class="btn btn-secondary">
-            Volver a mis tareas
+            <a href="<?= site_url('tareas/editar/' . $tarea['id']) ?>" class="btn btn-primary">Editar tarea</a>
         </a>
 
         <form

@@ -12,3 +12,5 @@ $routes->get('tareas/nueva', 'Tareas::nueva');
 $routes->post('tareas/guardar', 'Tareas::guardar');
 $routes->get('tareas/(:num)', 'Tareas::detalle/$1');
 $routes->post('tareas/eliminar/(:num)', 'Tareas::eliminar/$1');
+$routes->get('tareas/editar/(:num)', 'Tareas::editar/$1');
+$routes->post('tareas/actualizar/(:num)', 'Tareas::actualizar/$1');

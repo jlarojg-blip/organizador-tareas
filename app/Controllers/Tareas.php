@@ -48,6 +48,33 @@ public function detalle($id)
     return view('tarea_detalle', ['tarea' => $tarea]);
 }
 
+public function editar($id)
+{
+    $modelo = new TareaModel();
+    $tarea = $modelo->find($id);
+
+    if (!$tarea) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Tarea no encontrada');
+    }
+
+    return view('tarea_editar', ['tarea' => $tarea]);
+}
+
+public function actualizar($id)
+{
+    $modelo = new TareaModel();
+
+    $datos = [
+        'titulo' => $this->request->getPost('titulo'),
+        'descripcion' => $this->request->getPost('descripcion'),
+        'fecha_entrega' => $this->request->getPost('fecha_entrega'),
+    ];
+
+    $modelo->update($id, $datos);
+
+    return redirect()->to(site_url('tareas'));
+}
+
 public function eliminar($id)
 {
     $modelo = new TareaModel();
