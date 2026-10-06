@@ -13,7 +13,7 @@
 <form action="<?= site_url('tareas/actualizar/' . $tarea['id']) ?>" method="post">
         <div class="mb-3">
                 <label for="titulo" class="form-label">Título</label>
-<input type="text" id="titulo" name="titulo" class="form-control" value="<?= esc($tarea['titulo']) ?>" required>
+<input type="text" id="titulo" name="titulo"  required class="form-control" value="<?= esc($tarea['titulo']) ?>" required>
             </div>
 
             <div class="mb-3">
@@ -22,8 +22,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="fecha_entrega" class="form-label">Fecha de entrega</label>
-<input type="date" id="fecha_entrega" name="fecha_entrega" class="form-control" value="<?= esc($tarea['fecha_entrega']) ?>" required>
+                <label for="fecha_entrega" class="form-label">Fecha de entrega </label>
+<input type="date" id="fecha_entrega" required name="fecha_entrega" class="form-control" value="<?= esc($tarea['fecha_entrega']) ?>" required>
             </div>
 
 <button type="submit" class="btn btn-primary">Actualizar tarea</button>
