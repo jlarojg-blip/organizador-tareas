@@ -15,6 +15,7 @@ class UsuarioModel extends Model
     protected $allowedFields = [
     'nombre',
     'correo',
+    'foto',
     'contrasena',
     'codigo_recuperacion',
     'token_expira',

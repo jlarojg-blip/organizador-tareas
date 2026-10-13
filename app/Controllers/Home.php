@@ -338,4 +338,73 @@ $usuarios->update($id, $datos);
         ->with('mensaje', 'Los datos del perfil se actualizaron.');
 }
 
+public function actualizarFoto()
+{
+    $id = session()->get('usuario_id');
+    $usuarios = new UsuarioModel();
+    $usuario = $usuarios->find($id);
+
+    if (! $usuario) {
+        return redirect()->to(site_url('login'));
+    }
+
+    $reglas = [
+        'foto' => 'uploaded[foto]|is_image[foto]|mime_in[foto,image/png,image/jpeg,image/webp]|ext_in[foto,png,jpg,jpeg,webp]|max_size[foto,2048]',
+    ];
+
+    if (! $this->validateData([], $reglas)) {
+        $errores = implode(' ', $this->validator->getErrors());
+
+        return redirect()->to(site_url('perfil'))
+            ->with('error', $errores);
+    }
+
+    $archivo = $this->request->getFile('foto');
+    $nombreFoto = $archivo->getRandomName();
+    $directorio = FCPATH . 'uploads/perfiles';
+
+    $archivo->move($directorio, $nombreFoto);
+
+    $usuarios->update($id, [
+        'foto' => $nombreFoto,
+    ]);
+
+    if (! empty($usuario['foto'])) {
+        $fotoAnterior = $directorio . DIRECTORY_SEPARATOR . basename($usuario['foto']);
+
+        if (is_file($fotoAnterior)) {
+            unlink($fotoAnterior);
+        }
+    }
+
+    return redirect()->to(site_url('perfil'))
+        ->with('mensaje', 'Foto de perfil actualizada.');
+}
+
+public function eliminarFoto()
+{
+    $id = session()->get('usuario_id');
+    $usuarios = new UsuarioModel();
+    $usuario = $usuarios->find($id);
+
+    if (! $usuario) {
+        return redirect()->to(site_url('login'));
+    }
+
+    $nombreFoto = $usuario['foto'] ?? null;
+
+    $usuarios->update($id, ['foto' => null]);
+
+    if ($nombreFoto) {
+        $ruta = FCPATH . 'uploads/perfiles/' . basename($nombreFoto);
+
+        if (is_file($ruta)) {
+            unlink($ruta);
+        }
+    }
+
+    return redirect()->to(site_url('perfil'))
+        ->with('mensaje', 'Foto de perfil eliminada.');
+}
+
 }

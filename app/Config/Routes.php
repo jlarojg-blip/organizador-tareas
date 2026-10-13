@@ -19,6 +19,8 @@ $routes->post('tareas/actualizar/(:num)', 'Tareas::actualizar/$1', ['filter' => 
 $routes->get('perfil', 'Home::perfil', ['filter' => 'auth']);
 $routes->get('perfil/editar', 'Home::editarPerfil', ['filter' => 'auth']);
 $routes->post('perfil/actualizar', 'Home::actualizarPerfil', ['filter' => 'auth']);
+$routes->post('perfil/foto', 'Home::actualizarFoto', ['filter' => 'auth']);
+$routes->post('perfil/foto/eliminar', 'Home::eliminarFoto', ['filter' => 'auth']);
 $routes->post('logout', 'Home::logout');
 $routes->get('recuperar-clave', 'Home::recuperarClave');
 $routes->post('recuperar-clave/enviar', 'Home::enviarInstrucciones');
