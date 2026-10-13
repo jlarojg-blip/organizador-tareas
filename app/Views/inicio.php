@@ -29,17 +29,24 @@
     </main>
 
 <script>
+
+
     function cambiarIdioma(idioma) {
+
+        localStorage.setItem('idioma', idioma);
+
         const titulo = document.getElementById('titulo');
         const mensaje = document.getElementById('mensaje');
         const login = document.getElementById('login-button');
         const registro = document.getElementById('signup-button');
+        document.getElementById('login-forgot').textContent = 'Forgot password?';
 
         if (idioma === 'en') {
             titulo.textContent = 'School Tasks Organizer';
             mensaje.textContent = 'Welcome to the system.';
             login.textContent = 'Log in';
             registro.textContent = 'Sign up';
+
         } else {
             titulo.textContent = 'Organizador de tareas escolares';
             mensaje.textContent = 'Bienvenido al sistema.';
@@ -47,6 +54,8 @@
             registro.textContent = 'Registrarse';
         }
     }
+
+    cambiarIdioma(localStorage.getItem('idioma') || 'es');
 </script>
 </body>
 </html>

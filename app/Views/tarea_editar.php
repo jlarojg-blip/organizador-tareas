@@ -26,6 +26,19 @@
 <input type="date" id="fecha_entrega" required name="fecha_entrega" class="form-control" value="<?= esc($tarea['fecha_entrega']) ?>" required>
             </div>
 
+
+            <div class="mb-3">
+    <label for="estado" class="form-label">Estado</label>
+    <select id="estado" name="estado" class="form-select" required>
+        <option value="Pendiente" <?= $tarea['estado'] === 'Pendiente' ? 'selected' : '' ?>>
+            Pendiente
+        </option>
+        <option value="Completada" <?= $tarea['estado'] === 'Completada' ? 'selected' : '' ?>>
+            Completada
+        </option>
+    </select>
+</div>
+
 <button type="submit" class="btn btn-primary">Actualizar tarea</button>
             <a href="<?= site_url('tareas') ?>" class="btn btn-secondary">Volver</a>
         </form>

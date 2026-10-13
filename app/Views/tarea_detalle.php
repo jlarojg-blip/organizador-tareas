@@ -16,15 +16,21 @@
                 <hr>
 
                 <p><strong>ID:</strong> <?= esc($tarea['id']) ?></p>
+                <p><strong>Creada:</strong> <?= esc($tarea['created_at'] ?? 'No disponible') ?></p>
+<p><strong>Última actualización:</strong> <?= esc($tarea['updated_at'] ?? 'No disponible') ?></p>
                 <p><strong>Descripción:</strong><br><?= nl2br(esc($tarea['descripcion'])) ?></p>
                 <p><strong>Fecha de entrega:</strong> <?= esc($tarea['fecha_entrega']) ?></p>
                 <p class="mb-0"><strong>Estado:</strong> <?= esc($tarea['estado']) ?></p>
             </div>
         </div>
 
-        <a href="<?= site_url('tareas') ?>" class="btn btn-secondary">
-            <a href="<?= site_url('tareas/editar/' . $tarea['id']) ?>" class="btn btn-primary">Editar tarea</a>
-        </a>
+<a href="<?= site_url('tareas') ?>" class="btn btn-secondary">
+    Volver a tareas
+</a>
+
+<a href="<?= site_url('tareas/editar/' . $tarea['id']) ?>" class="btn btn-primary">
+    Editar tarea
+</a>
 
         <form
             action="<?= site_url('tareas/eliminar/' . $tarea['id']) ?>"
