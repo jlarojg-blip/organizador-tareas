@@ -70,12 +70,20 @@ public function actualizar($id)
 {
     $id = (int) $id;
 
-    $reglas = [
-        'nombre'        => 'required|min_length[2]|max_length[100]',
-        'correo'        => 'required|valid_email|max_length[150]',
-        'activo'        => 'required|in_list[0,1]',
-        'administrador' => 'required|in_list[0,1]',
-    ];
+        $reglas = [
+    'nombre'        => 'required|min_length[2]|max_length[100]',
+    'correo'        => 'required|valid_email|max_length[150]',
+    'activo'        => 'required|in_list[0,1]',
+    'administrador' => 'required|in_list[0,1]',
+];
+
+$contrasena = (string) $this->request->getPost('contrasena');
+$confirmarContrasena = (string) $this->request->getPost('confirmar_contrasena');
+
+if ($contrasena !== '' || $confirmarContrasena !== '') {
+    $reglas['contrasena'] = 'required|min_length[8]';
+    $reglas['confirmar_contrasena'] = 'required|matches[contrasena]';
+}
 
     if (! $this->validate($reglas)) {
         return redirect()->back()
@@ -108,6 +116,11 @@ public function actualizar($id)
         'activo'        => (int) $this->request->getPost('activo'),
         'administrador' => (int) $this->request->getPost('administrador'),
     ];
+
+    if ($contrasena !== '') {
+    $datos['contrasena'] = password_hash($contrasena, PASSWORD_DEFAULT);
+}
+
 
     $modelo->update($id, $datos);
 

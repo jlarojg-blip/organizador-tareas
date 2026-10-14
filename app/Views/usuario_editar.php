@@ -52,6 +52,30 @@
             </div>
 
             <div class="mb-3">
+    <label for="contrasena" class="form-label">Nueva contraseña (opcional)</label>
+    <input
+        type="password"
+        id="contrasena"
+        name="contrasena"
+        class="form-control"
+        minlength="8"
+    >
+    <div class="form-text">Déjala vacía para conservar la contraseña actual.</div>
+</div>
+
+<div class="mb-3">
+    <label for="confirmar_contrasena" class="form-label">Repetir contraseña</label>
+    <input
+        type="password"
+        id="confirmar_contrasena"
+        name="confirmar_contrasena"
+        class="form-control"
+        minlength="8"
+    >
+</div>
+
+
+            <div class="mb-3">
                 <label for="activo" class="form-label">Estado de la cuenta</label>
                 <select id="activo" name="activo" class="form-select">
                     <option value="1" <?= $usuario['activo'] ? 'selected' : '' ?>>Activa</option>
