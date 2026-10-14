@@ -13,6 +13,12 @@
     <main class="container py-4">
         <h1 class="mb-4">Mis tareas</h1>
 
+        <?php if ((int) session()->get('administrador') === 1): ?>
+    <a href="<?= site_url('usuarios') ?>" class="btn btn-outline-primary mb-3">
+        Administrar usuarios
+    </a>
+<?php endif; ?>
+
         <p>Hola, <?= esc(session()->get('usuario_nombre')) ?>.</p>
 
 <a href="<?= site_url('perfil') ?>" class="btn btn-outline-primary mb-3">
