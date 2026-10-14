@@ -28,9 +28,16 @@
                         height="120"
                         class="rounded-circle mb-3"
                     >
-                <?php else: ?>
-                    <p class="text-muted">Aún no tienes una foto de perfil.</p>
-                <?php endif; ?>
+
+                                        <?php else: ?>
+ <div
+    class="rounded-circle d-flex align-items-center justify-content-center mb-3"
+    style="width: 120px; height: 120px; font-size: 2rem; background-color: #6c757d; color: #fff;"
+    aria-label="Avatar predeterminado"
+>
+    <?= esc(mb_strtoupper(mb_substr($usuario['nombre'] ?? '?', 0, 1))) ?>
+</div>
+                    <?php endif; ?>
 
                 <form
                     action="<?= site_url('perfil/foto') ?>"
