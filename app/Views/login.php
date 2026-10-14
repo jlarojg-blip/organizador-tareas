@@ -32,6 +32,19 @@
                                 <input type="email" id="correo" name="correo" class="form-control" required>
                             </div>
 
+                            <div class="form-check mb-3">
+    <input
+        class="form-check-input"
+        type="checkbox"
+        id="recordarme"
+        name="recordarme"
+        value="1"
+    >
+    <label id="remember-label" class="form-check-label" for="recordarme">
+        Recordarme
+    </label>
+</div>
+
                             <div class="mb-3">
                                 <label id="login-password-label" for="contrasena" class="form-label">Contraseña</label>
                                 <input type="password" id="contrasena" name="contrasena" class="form-control" required>
@@ -62,6 +75,7 @@ if (localStorage.getItem('idioma') === 'en') {
     document.getElementById('login-password-label').textContent = 'Password';
     document.getElementById('login-submit').textContent = 'Sign in';
     document.getElementById('login-back').textContent = 'Return to home';
+    document.getElementById('remember-label').textContent = 'Remember me';
 }
 </script>
 

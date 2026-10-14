@@ -21,6 +21,8 @@ class UsuarioModel extends Model
     'token_expira',
     'activo',
     'codigo_activacion',
+    'recordar_token',
+    'recordar_expira',
     'administrador',
 ];
 

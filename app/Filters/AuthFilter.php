@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Filters;
+use App\Models\UsuarioModel;
+
 
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
@@ -23,13 +25,56 @@ class AuthFilter implements FilterInterface
      *
      * @return RequestInterface|ResponseInterface|string|void
      */
-    public function before(RequestInterface $request, $arguments = null)
-    {
-        if (! session()->get('logueado')) {
-    return redirect()->to(site_url('login'));
-}
+   public function before(RequestInterface $request, $arguments = null)
+{
+    if (session()->get('logueado')) {
+        return;
     }
 
+    $cookie = $request->getCookie('recordarme');
+
+    if (empty($cookie)) {
+        return redirect()->to(site_url('login'));
+    }
+
+    $partes = explode(':', (string) $cookie, 2);
+
+    if (count($partes) !== 2 || ! ctype_digit($partes[0])) {
+        $respuesta = redirect()->to(site_url('login'));
+        $respuesta->deleteCookie('recordarme');
+
+        return $respuesta;
+    }
+
+    [$id, $token] = $partes;
+
+    $usuarios = new UsuarioModel();
+    $usuario = $usuarios->find((int) $id);
+
+    $tokenValido = $usuario
+        && (int) $usuario['activo'] === 1
+        && ! empty($usuario['recordar_token'])
+        && ! empty($usuario['recordar_expira'])
+        && strtotime($usuario['recordar_expira']) > time()
+        && hash_equals(
+            $usuario['recordar_token'],
+            hash('sha256', $token)
+        );
+
+    if (! $tokenValido) {
+        $respuesta = redirect()->to(site_url('login'));
+        $respuesta->deleteCookie('recordarme');
+
+        return $respuesta;
+    }
+
+    session()->set([
+        'usuario_id' => $usuario['id'],
+        'usuario_nombre' => $usuario['nombre'],
+        'administrador' => (int) $usuario['administrador'],
+        'logueado' => true,
+    ]);
+}
     /**
      * Allows After filters to inspect and modify the response
      * object as needed. This method does not allow any way

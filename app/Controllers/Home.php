@@ -94,22 +94,73 @@ public function autenticar()
         ->with('error', 'Activa tu cuenta desde el enlace que enviamos a tu correo.');
 }
 
+    $recordar = $this->request->getPost('recordarme') === '1';
+    $tokenRecordarme = null;
+
+    if ($recordar) {
+        $tokenRecordarme = bin2hex(random_bytes(32));
+
+        $usuarios->update($usuario['id'], [
+            'recordar_token' => hash('sha256', $tokenRecordarme),
+            'recordar_expira' => date('Y-m-d H:i:s', time() + 60 * 60 * 24 * 30),
+        ]);
+    } else {
+        $usuarios->update($usuario['id'], [
+            'recordar_token' => null,
+            'recordar_expira' => null,
+        ]);
+    }
+
     session()->set([
-        'usuario_id'     => $usuario['id'],
+        'usuario_id' => $usuario['id'],
         'usuario_nombre' => $usuario['nombre'],
         'administrador' => (int) $usuario['administrador'],
-        'logueado'       => true,
+        'logueado' => true,
     ]);
 
-    return redirect()->to(site_url('tareas'));
-}
+    $respuesta = redirect()->to(site_url('tareas'));
+
+    if ($recordar) {
+        $respuesta->setCookie(
+            'recordarme',
+            $usuario['id'] . ':' . $tokenRecordarme,
+            60 * 60 * 24 * 30,
+            '',
+            '/',
+            '',
+            false,
+            true,
+            'Lax'
+        );
+    } else {
+        $respuesta->deleteCookie('recordarme');
+    }
+
+    return $respuesta;
+        }
+
 
 public function logout()
 {
+    $id = session()->get('usuario_id');
+
+    if ($id) {
+        $usuarios = new UsuarioModel();
+        $usuarios->update($id, [
+            'recordar_token' => null,
+            'recordar_expira' => null,
+        ]);
+    }
+
     session()->destroy();
 
-    return redirect()->to(site_url('login'));
+    $respuesta = redirect()->to(site_url('login'));
+    $respuesta->deleteCookie('recordarme');
+
+    return $respuesta;
 }
+
+
 public function recuperarClave(): string
 {
     return view('recuperar_clave');
