@@ -10,6 +10,14 @@
     <main class="container py-4">
         <h1 class="mb-4">Usuarios</h1>
 
+        <?php if ($mensaje = session()->getFlashdata('mensaje')): ?>
+    <div class="alert alert-success"><?= esc($mensaje) ?></div>
+<?php endif; ?>
+
+<a href="<?= site_url('usuarios/nuevo') ?>" class="btn btn-primary mb-3">
+    Nuevo usuario
+</a>
+
         <div class="d-flex gap-2 mb-3">
             <a href="<?= site_url('usuarios') . '?orden=nuevos' ?>" class="btn btn-primary">
                 Más nuevos

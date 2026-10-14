@@ -132,4 +132,40 @@ if ($contrasena !== '' || $confirmarContrasena !== '') {
         ->with('mensaje', 'Los datos del usuario se actualizaron.');
 }
 
+public function nuevo()
+{
+    return view('usuario_nuevo');
+}
+
+public function crear()
+{
+    $reglas = [
+        'nombre'     => 'required|min_length[2]|max_length[100]',
+        'correo'     => 'required|valid_email|max_length[150]|is_unique[usuarios.correo]',
+        'contrasena' => 'required|min_length[8]',
+    ];
+
+    if (! $this->validate($reglas)) {
+        return redirect()->back()
+            ->withInput()
+            ->with('errores', $this->validator->getErrors());
+    }
+
+    $modelo = new UsuarioModel();
+
+    $modelo->insert([
+        'nombre'        => trim((string) $this->request->getPost('nombre')),
+        'correo'        => trim((string) $this->request->getPost('correo')),
+        'contrasena'    => password_hash(
+            $this->request->getPost('contrasena'),
+            PASSWORD_DEFAULT
+        ),
+        'activo'        => 1,
+        'administrador' => 0,
+    ]);
+
+    return redirect()->to(site_url('usuarios'))
+        ->with('mensaje', 'Usuario creado correctamente.');
+}
+
 }
