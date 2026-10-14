@@ -97,6 +97,7 @@ public function autenticar()
     session()->set([
         'usuario_id'     => $usuario['id'],
         'usuario_nombre' => $usuario['nombre'],
+        'administrador' => (int) $usuario['administrador'],
         'logueado'       => true,
     ]);
 
