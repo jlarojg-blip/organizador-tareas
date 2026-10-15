@@ -15,7 +15,7 @@
     <button type="button" class="btn btn-outline-primary" onclick="cambiarIdioma('es')">Español</button>
     <button type="button" class="btn btn-outline-primary" onclick="cambiarIdioma('en')">English</button>
 
-        <a class="navbar-brand" href="/">Home</a>
+<a class="navbar-brand" href="<?= site_url('/') ?>">Inicio</a>
     </div>
 </nav>
     <main class="container mt-5">
@@ -23,39 +23,48 @@
         <p id="mensaje">Bienvenido al sistema.</p>
 
         <div class="mt-4">
-    <a id="login-button" href="/login" class="btn btn-primary">Iniciar sesión</a>
-<a id="signup-button" href="/registro" class="btn btn-primary">Registrarse</a>
+<a id="login-button" href="<?= site_url('login') ?>" class="btn btn-primary">
+    Iniciar sesión
+</a>
+<a id="signup-button" href="<?= site_url('registro') ?>" class="btn btn-primary">
+    Registrarse
+</a>
 </div>
     </main>
 
 <script>
+function cambiarIdioma(idioma) {
+    localStorage.setItem('idioma', idioma);
+    document.documentElement.lang = idioma;
 
+    const ingles = idioma === 'en';
 
-    function cambiarIdioma(idioma) {
+    document.title = ingles
+        ? 'School Tasks Organizer'
+        : 'Organizador de tareas';
 
-        localStorage.setItem('idioma', idioma);
+    document.getElementById('titulo').textContent = ingles
+        ? 'School Tasks Organizer'
+        : 'Organizador de tareas escolares';
 
-        const titulo = document.getElementById('titulo');
-        const mensaje = document.getElementById('mensaje');
-        const login = document.getElementById('login-button');
-        const registro = document.getElementById('signup-button');
-        document.getElementById('login-forgot').textContent = 'Forgot password?';
+    document.getElementById('mensaje').textContent = ingles
+        ? 'Welcome to the system.'
+        : 'Bienvenido al sistema.';
 
-        if (idioma === 'en') {
-            titulo.textContent = 'School Tasks Organizer';
-            mensaje.textContent = 'Welcome to the system.';
-            login.textContent = 'Log in';
-            registro.textContent = 'Sign up';
+    document.getElementById('login-button').textContent = ingles
+        ? 'Log in'
+        : 'Iniciar sesión';
 
-        } else {
-            titulo.textContent = 'Organizador de tareas escolares';
-            mensaje.textContent = 'Bienvenido al sistema.';
-            login.textContent = 'Iniciar sesión';
-            registro.textContent = 'Registrarse';
-        }
-    }
+    document.getElementById('signup-button').textContent = ingles
+        ? 'Sign up'
+        : 'Registrarse';
 
-    cambiarIdioma(localStorage.getItem('idioma') || 'es');
+    document.querySelector('.navbar-brand').textContent = ingles
+        ? 'Home'
+        : 'Inicio';
+}
+
+cambiarIdioma(localStorage.getItem('idioma') || 'es');
 </script>
 </body>
 </html>

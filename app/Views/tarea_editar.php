@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
 </head>
 <body>
+    <?= view('menu') ?>
     <main class="container mt-5">
         <h1>Editar Tarea</h1>
 

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
 </head>
 <body>
+    <?= view('menu') ?>
     <main class="container py-4">
         <h1 class="mb-4">Detalle de usuario</h1>
 
