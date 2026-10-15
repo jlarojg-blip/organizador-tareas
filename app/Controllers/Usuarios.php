@@ -52,8 +52,8 @@ public function editar($id)
     $modelo = new UsuarioModel();
 
     $usuario = $modelo
-        ->select('id, nombre, correo, activo, administrador')
-        ->find($id);
+->select('id, nombre, correo, activo, administrador, profesor')
+    ->find($id);
 
     if (! $usuario) {
         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
@@ -75,6 +75,7 @@ public function actualizar($id)
     'correo'        => 'required|valid_email|max_length[150]',
     'activo'        => 'required|in_list[0,1]',
     'administrador' => 'required|in_list[0,1]',
+    'profesor' => 'required|in_list[0,1]',
 ];
 
 $contrasena = (string) $this->request->getPost('contrasena');
@@ -115,6 +116,7 @@ if ($contrasena !== '' || $confirmarContrasena !== '') {
         'correo'        => $correo,
         'activo'        => (int) $this->request->getPost('activo'),
         'administrador' => (int) $this->request->getPost('administrador'),
+        'profesor' => (int) $this->request->getPost('profesor'),
     ];
 
     if ($contrasena !== '') {
@@ -143,6 +145,7 @@ public function crear()
         'nombre'     => 'required|min_length[2]|max_length[100]',
         'correo'     => 'required|valid_email|max_length[150]|is_unique[usuarios.correo]',
         'contrasena' => 'required|min_length[8]',
+        'profesor' => 'required|in_list[0,1]',
     ];
 
     if (! $this->validate($reglas)) {
@@ -156,6 +159,7 @@ public function crear()
     $modelo->insert([
         'nombre'        => trim((string) $this->request->getPost('nombre')),
         'correo'        => trim((string) $this->request->getPost('correo')),
+        'profesor' => (int) $this->request->getPost('profesor'),
         'contrasena'    => password_hash(
             $this->request->getPost('contrasena'),
             PASSWORD_DEFAULT

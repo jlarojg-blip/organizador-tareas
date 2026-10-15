@@ -16,8 +16,10 @@ public function index()
         : 'DESC';
 
     $tareas = $modelo
-        ->where('usuario_id', session()->get('usuario_id'))
-        ->orderBy('id', $orden)
+        ->select('tareas.*')
+        ->join('usuarios', 'usuarios.id = tareas.usuario_id')
+        ->where('usuarios.profesor', 1)
+        ->orderBy('tareas.id', $orden)
         ->findAll();
 
     return view('tareas', [
@@ -44,20 +46,24 @@ public function index()
 
         return redirect()->to(site_url('tareas'));
     }
+public function detalle($id)
+{
+    $modelo = new TareaModel();
 
-    public function detalle($id)
-    {
-        $modelo = new TareaModel();
-        $tarea = $modelo
-            ->where('usuario_id', session()->get('usuario_id'))
-            ->find($id);
+    $tarea = $modelo
+        ->select('tareas.*')
+        ->join('usuarios', 'usuarios.id = tareas.usuario_id')
+        ->where('usuarios.profesor', 1)
+        ->find($id);
 
-        if (! $tarea) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Tarea no encontrada');
-        }
-
-        return view('tarea_detalle', ['tarea' => $tarea]);
+    if (! $tarea) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
+            'Tarea no encontrada'
+        );
     }
+
+    return view('tarea_detalle', ['tarea' => $tarea]);
+}
 
     public function editar($id)
     {

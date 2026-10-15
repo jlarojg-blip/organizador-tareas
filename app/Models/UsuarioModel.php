@@ -24,6 +24,8 @@ class UsuarioModel extends Model
     'recordar_token',
     'recordar_expira',
     'administrador',
+    'profesor',
+
 ];
 
     protected bool $allowEmptyInserts = false;

@@ -60,6 +60,19 @@
                 <div class="form-text">Debe tener al menos 8 caracteres.</div>
             </div>
 
+            <div class="mb-3">
+    <label for="profesor" class="form-label">Tipo de usuario</label>
+    <select id="profesor" name="profesor" class="form-select" required>
+        <option value="0" <?= (int) old('profesor') === 0 ? 'selected' : '' ?>>
+            Alumno
+        </option>
+        <option value="1" <?= (int) old('profesor') === 1 ? 'selected' : '' ?>>
+            Profesor
+        </option>
+    </select>
+</div>
+
+
             <button type="submit" class="btn btn-primary">Crear usuario</button>
             <a href="<?= site_url('usuarios') ?>" class="btn btn-secondary">Cancelar</a>
         </form>

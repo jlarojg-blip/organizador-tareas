@@ -115,6 +115,7 @@ public function autenticar()
         'usuario_id' => $usuario['id'],
         'usuario_nombre' => $usuario['nombre'],
         'administrador' => (int) $usuario['administrador'],
+        'profesor' => (int) $usuario['profesor'],
         'logueado' => true,
     ]);
 

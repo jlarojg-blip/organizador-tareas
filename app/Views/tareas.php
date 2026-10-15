@@ -13,6 +13,12 @@
     <main class="container py-4">
         <h1 class="mb-4">Mis tareas</h1>
 
+        <?php if ((int) session()->get('profesor') === 1): ?>
+    <a href="<?= site_url('tareas/nueva') ?>" class="btn btn-primary mb-3">
+        Nueva tarea
+    </a>
+<?php endif; ?>
+
         <?php if ((int) session()->get('administrador') === 1): ?>
     <a href="<?= site_url('usuarios') ?>" class="btn btn-outline-primary mb-3">
         Administrar usuarios

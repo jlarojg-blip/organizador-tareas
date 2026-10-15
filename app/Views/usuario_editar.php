@@ -91,6 +91,18 @@
                 </select>
             </div>
 
+            <div class="mb-3">
+    <label for="profesor" class="form-label">Tipo de usuario</label>
+    <select id="profesor" name="profesor" class="form-select" required>
+        <option value="0" <?= (int) $usuario['profesor'] === 0 ? 'selected' : '' ?>>
+            Alumno
+        </option>
+        <option value="1" <?= (int) $usuario['profesor'] === 1 ? 'selected' : '' ?>>
+            Profesor
+        </option>
+    </select>
+</div>
+
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
             <a href="<?= site_url('usuarios/' . $usuario['id']) ?>" class="btn btn-secondary">Cancelar</a>
         </form>

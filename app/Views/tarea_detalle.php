@@ -23,24 +23,29 @@
                 <p class="mb-0"><strong>Estado:</strong> <?= esc($tarea['estado']) ?></p>
             </div>
         </div>
-
 <a href="<?= site_url('tareas') ?>" class="btn btn-secondary">
     Volver a tareas
 </a>
 
-<a href="<?= site_url('tareas/editar/' . $tarea['id']) ?>" class="btn btn-primary">
-    Editar tarea
-</a>
+<?php if (
+    (int) session()->get('profesor') === 1
+    && (int) $tarea['usuario_id'] === (int) session()->get('usuario_id')
+): ?>
+    <a href="<?= site_url('tareas/editar/' . $tarea['id']) ?>" class="btn btn-primary">
+        Editar tarea
+    </a>
 
-        <form
-            action="<?= site_url('tareas/eliminar/' . $tarea['id']) ?>"
-            method="post"
-            class="d-inline"
-            onsubmit="return confirm('¿Seguro que quieres eliminar esta tarea?')"
-        >
-            <?= csrf_field() ?>
-            <button type="submit" class="btn btn-danger">Eliminar tarea</button>
-        </form>
+    <form
+        action="<?= site_url('tareas/eliminar/' . $tarea['id']) ?>"
+        method="post"
+        class="d-inline"
+        onsubmit="return confirm('¿Seguro que quieres eliminar esta tarea?')"
+    >
+        <?= csrf_field() ?>
+        <button type="submit" class="btn btn-danger">Eliminar tarea</button>
+    </form>
+<?php endif; ?>
+
     </main>
 </body>
 </html>
