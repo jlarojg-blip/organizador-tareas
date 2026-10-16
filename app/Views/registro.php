@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registro</title>
+    <title data-es="Registro" data-en="Registration">Registro</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
 </head>
 <body>
@@ -12,8 +12,8 @@
             <div class="col-md-6 col-lg-5">
                 <div class="card">
                     <div class="card-body">
-                        <h1 id="register-title">Crear cuenta</h1>
-                        <p id="register-description">Regístrate para organizar tus tareas escolares.</p>
+                        <h1 id="register-title" data-es="Crear cuenta" data-en="Create account">Crear cuenta</h1>
+                        <p id="register-description" data-es="Regístrate para organizar tus tareas escolares." data-en="Sign up to organize your school tasks.">Regístrate para organizar tus tareas escolares.</p>
 
                         <?php if ($errores = session()->getFlashdata('errores')): ?>
     <div class="alert alert-danger">
@@ -27,43 +27,31 @@
 
                         <form action="<?= site_url('registro/guardar') ?>" method="post">
                             <div class="mb-3">
-                                <label id="register-name-label" for="nombre" class="form-label">Nombre</label>
+                                <label id="register-name-label" for="nombre" class="form-label" data-es="Nombre" data-en="Name">Nombre</label>
                                 <input type="text" id="nombre" name="nombre"  class="form-control">
                             </div>
 
                             <div class="mb-3">
-                                <label id="register-email-label"for="correo" class="form-label">Correo electrónico</label>
+                                <label id="register-email-label"for="correo" class="form-label" data-es="Correo electrónico" data-en="Email address">Correo electrónico</label>
                                 <input type="email" id="correo" name="correo"  class="form-control">
                             </div>
 
                             <div class="mb-3">
-                                <label  id="register-password-label" for="contrasena" class="form-label">Contraseña</label>
+                                <label  id="register-password-label" for="contrasena" class="form-label" data-es="Contraseña" data-en="Password">Contraseña</label>
                                 <input type="password" id="contrasena" name="contrasena" class="form-control">
                             </div>
 
-                            <button id="register-submit" type="submit" class="btn btn-primary">Crear cuenta</button>
+                            <button id="register-submit" type="submit" class="btn btn-primary" data-es="Crear cuenta" data-en="Create account">Crear cuenta</button>
                         </form>
 
-                        <a  id="register-back" href="/" class="d-block mt-3">Volver al inicio</a>
+                        <a  id="register-back" href="<?= site_url('/') ?>" class="d-block mt-3" data-es="Volver al inicio" data-en="Back to home">Volver al inicio</a>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <script>
-if (localStorage.getItem('idioma') === 'en') {
-    document.documentElement.lang = 'en';
-    document.title = 'Create account';
 
-    document.getElementById('register-title').textContent = 'Create account';
-    document.getElementById('register-description').textContent = 'Sign up to organize your school tasks.';
-    document.getElementById('register-name-label').textContent = 'Name';
-    document.getElementById('register-email-label').textContent = 'Email address';
-    document.getElementById('register-password-label').textContent = 'Password';
-    document.getElementById('register-submit').textContent = 'Create account';
-    document.getElementById('register-back').textContent = 'Return to home';
-}
-</script>
+    <?= view('idioma_publico') ?>
 </body>
 </html>

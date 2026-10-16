@@ -43,7 +43,10 @@
     </div>
 </nav>
 
+<?= view('idioma_mensajes') ?>
+
 <script>
+    traducirMensajes(idioma);
 function cambiarIdioma(idioma) {
     localStorage.setItem('idioma', idioma);
     document.documentElement.lang = idioma;

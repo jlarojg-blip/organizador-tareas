@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mi perfil</title>
+<title data-es="Mi perfil" data-en="My profile">Mi perfil</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
 </head>
 <body>
     <?= view('menu') ?>
     <main class="container py-4">
-        <h1 class="mb-4">Mi perfil</h1>
+    <h1 class="mb-4" data-es="Mi perfil" data-en="My profile">Mi perfil</h1>
 
         <?php if ($mensaje = session()->getFlashdata('mensaje')): ?>
             <div class="alert alert-success"><?= esc($mensaje) ?></div>
@@ -49,8 +49,12 @@
                     <?= csrf_field() ?>
 
                     <div class="mb-3">
-                        <label for="foto" class="form-label">Selecciona una foto</label>
-                        <input
+                    <label for="foto" class="form-label"
+                    data-es="Selecciona una foto" data-en="Choose a photo">
+                    Selecciona una foto
+                </label>
+
+                    <input
                             type="file"
                             id="foto"
                             name="foto"
@@ -58,21 +62,40 @@
                             accept="image/png,image/jpeg,image/webp"
                             required
                         >
-                        <div class="form-text">Formatos PNG, JPG o WEBP. Máximo 2 MB.</div>
+<div class="form-text"
+     data-es="Formatos PNG, JPG o WEBP. Máximo 2 MB."
+     data-en="PNG, JPG or WEBP formats. Maximum 2 MB.">
+    Formatos PNG, JPG o WEBP. Máximo 2 MB.
+</div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Subir foto</button>
+<button type="submit" class="btn btn-primary"
+        data-es="Subir foto" data-en="Upload photo">
+    Subir foto
+</button>
+
                 </form>
 
-                <p><strong>Nombre:</strong> <?= esc($usuario['nombre']) ?></p>
-                <p><strong>Correo:</strong> <?= esc($usuario['correo']) ?></p>
 
-                <a href="<?= site_url('perfil/editar') ?>" class="btn btn-primary">
-                    Editar perfil
-                </a>
-                <a href="<?= site_url('tareas') ?>" class="btn btn-secondary">
-                    Volver a mis tareas
-                </a>
+                <p>
+    <strong data-es="Nombre:" data-en="Name:">Nombre:</strong>
+    <?= esc($usuario['nombre']) ?>
+</p>
+<p>
+    <strong data-es="Correo:" data-en="Email:">Correo:</strong>
+    <?= esc($usuario['correo']) ?>
+</p>
+
+
+<a href="<?= site_url('perfil/editar') ?>" class="btn btn-primary"
+   data-es="Editar perfil" data-en="Edit profile">
+    Editar perfil
+</a>
+<a href="<?= site_url('tareas') ?>" class="btn btn-secondary"
+   data-es="Volver a mis tareas" data-en="Back to tasks">
+    Volver a mis tareas
+</a>
+
 
                 <form action="<?= site_url('logout') ?>" method="post" class="d-inline">
                     <?= csrf_field() ?>
@@ -86,12 +109,16 @@
         action="<?= site_url('perfil/foto/eliminar') ?>"
         method="post"
         class="mb-4"
-        onsubmit="return confirm('¿Eliminar tu foto de perfil?')"
-    >
+onsubmit="return confirm(document.documentElement.lang === 'en'
+    ? 'Delete your profile photo?'
+    : '¿Eliminar tu foto de perfil?')"
+        >
         <?= csrf_field() ?>
-        <button type="submit" class="btn btn-outline-danger">
-            Eliminar foto
-        </button>
+
+        <button type="submit" class="btn btn-outline-danger"
+        data-es="Eliminar foto" data-en="Delete photo">
+    Eliminar foto
+</button>
     </form>
 <?php endif; ?>
 
