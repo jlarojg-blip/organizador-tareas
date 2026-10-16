@@ -15,7 +15,24 @@
                         <h1 class="h3" data-es="Cambiar contraseña" data-en="Reset password">Cambiar contraseña</h1>
                         <p data-es="Escribe tu nueva contraseña." data-en="Enter your new password.">Escribe tu nueva contraseña.</p>
 
+
+                        <?php if ($error = session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger"><?= esc($error) ?></div>
+<?php endif; ?>
+
+<?php if ($errores = session()->getFlashdata('errores')): ?>
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            <?php foreach ($errores as $mensaje): ?>
+                <li><?= esc($mensaje) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
                         <form action="<?= site_url('restablecer-clave/' . $codigo) ?>" method="post">
+                            <?= csrf_field() ?>
+
                             <div class="mb-3">
                                 <label for="contrasena" class="form-label" data-es="Nueva contraseña" data-en="New password">Nueva contraseña</label>
                                 <input
