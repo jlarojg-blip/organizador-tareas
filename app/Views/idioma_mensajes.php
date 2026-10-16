@@ -57,10 +57,63 @@ function traducirMensajes(idioma) {
 
         const original = elemento.textContent.trim();
 
+
         if (Object.prototype.hasOwnProperty.call(traducciones, original)) {
-            elemento.setAttribute('data-es', original);
-            elemento.setAttribute('data-en', traducciones[original]);
-        }
+    elemento.setAttribute('data-es', original);
+    elemento.setAttribute('data-en', traducciones[original]);
+} else {
+    const reglas = [
+        [/The (.+?) field is required\./g,
+            'El campo $1 es obligatorio.'],
+        [/The (.+?) field must contain a valid email address\./g,
+            'El campo $1 debe contener un correo válido.'],
+        [/The (.+?) field must contain a unique value\./g,
+            'El valor de $1 ya está registrado.'],
+        [/The (.+?) field does not match the (.+?) field\./g,
+            'El campo $1 no coincide con $2.'],
+        [/The (.+?) field must be at least (\d+) characters in length\./g,
+            'El campo $1 debe tener al menos $2 caracteres.'],
+        [/The (.+?) field cannot exceed (\d+) characters in length\./g,
+            'El campo $1 no puede superar $2 caracteres.'],
+        [/The (.+?) field must be one of: (.+?)\./g,
+            'El campo $1 debe tener uno de estos valores: $2.'],
+        [/(\w+) is not a valid uploaded file\./g,
+            'Debes seleccionar un archivo válido para $1.'],
+        [/(\w+) is too large of a file\./g,
+            'El archivo de $1 supera el tamaño permitido.'],
+        [/(\w+) is not a valid, uploaded image file\./g,
+            'El archivo de $1 debe ser una imagen válida.'],
+        [/(\w+) does not have a valid mime type\./g,
+            'El formato del archivo de $1 no está permitido.'],
+        [/(\w+) does not have a valid file extension\./g,
+            'La extensión del archivo de $1 no está permitida.']
+    ];
+
+    let espanol = original;
+
+    reglas.forEach(function ([patron, traduccion]) {
+        espanol = espanol.replace(patron, traduccion);
+    });
+
+    const nombres = {
+        confirmar_contrasena: 'confirmación de contraseña',
+        nueva_contrasena: 'nueva contraseña',
+        contrasena_actual: 'contraseña actual',
+        contrasena: 'contraseña',
+        fecha_entrega: 'fecha de entrega',
+        descripcion: 'descripción'
+    };
+
+    if (espanol !== original) {
+        Object.entries(nombres).forEach(function ([campo, nombre]) {
+            espanol = espanol.replace(new RegExp('\\b' + campo + '\\b', 'g'), nombre);
+        });
+
+        elemento.setAttribute('data-es', espanol);
+        elemento.setAttribute('data-en', original);
+    }
+}
+
     });
 
     document.querySelectorAll('.alert[data-es][data-en], .alert [data-es][data-en]')
