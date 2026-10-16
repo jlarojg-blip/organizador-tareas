@@ -45,18 +45,22 @@
 
 <?= view('idioma_mensajes') ?>
 
+
 <script>
-    traducirMensajes(idioma);
 function cambiarIdioma(idioma) {
-    localStorage.setItem('idioma', idioma);
-    document.documentElement.lang = idioma;
+    const elegido = idioma === 'en' ? 'en' : 'es';
+
+    localStorage.setItem('idioma', elegido);
+    document.documentElement.lang = elegido;
+
+    traducirMensajes(elegido);
 
     document.querySelectorAll('[data-es][data-en]').forEach(function (elemento) {
-        elemento.textContent = elemento.getAttribute('data-' + idioma);
+        elemento.textContent = elemento.getAttribute('data-' + elegido);
     });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    cambiarIdioma(localStorage.getItem('idioma') === 'en' ? 'en' : 'es');
+    cambiarIdioma(localStorage.getItem('idioma') || 'es');
 });
 </script>
