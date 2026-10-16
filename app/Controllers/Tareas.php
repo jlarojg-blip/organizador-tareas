@@ -32,20 +32,40 @@ public function index()
         return view('tarea_nueva');
     }
 
-    public function guardar()
-    {
-        $modelo = new TareaModel();
+   public function guardar()
+{
+    $datos = [
+        'usuario_id'    => session()->get('usuario_id'),
+        'titulo'        => trim((string) $this->request->getPost('titulo')),
+        'descripcion'   => trim((string) $this->request->getPost('descripcion')),
+        'fecha_entrega' => (string) $this->request->getPost('fecha_entrega'),
+        'estado'        => 'Pendiente',
+    ];
 
-        $modelo->insert([
-            'usuario_id' => session()->get('usuario_id'),
-            'titulo' => $this->request->getPost('titulo'),
-            'descripcion' => $this->request->getPost('descripcion'),
-            'fecha_entrega' => $this->request->getPost('fecha_entrega'),
-            'estado' => 'Pendiente',
-        ]);
+    $reglas = [
+        'titulo'        => 'required|max_length[100]',
+        'descripcion'   => 'required',
+        'fecha_entrega' => 'required|valid_date[Y-m-d]',
+    ];
 
-        return redirect()->to(site_url('tareas'));
+    if (! $this->validateData($datos, $reglas)) {
+        return redirect()->back()
+            ->withInput()
+            ->with('errores', $this->validator->getErrors());
     }
+
+    $modelo = new TareaModel();
+
+    if ($modelo->insert($datos) === false) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'No se pudo guardar la tarea.');
+    }
+
+    return redirect()->to(site_url('tareas'));
+}
+
+
 public function detalle($id)
 {
     $modelo = new TareaModel();
@@ -79,34 +99,49 @@ public function detalle($id)
         return view('tarea_editar', ['tarea' => $tarea]);
     }
 
+
     public function actualizar($id)
-    {
-        $modelo = new TareaModel();
-        $tarea = $modelo
-            ->where('usuario_id', session()->get('usuario_id'))
-            ->find($id);
+{
+    $modelo = new TareaModel();
 
-        if (! $tarea) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Tarea no encontrada');
-        }
+    $tarea = $modelo
+        ->where('usuario_id', session()->get('usuario_id'))
+        ->find($id);
 
-        $estado = $this->request->getPost('estado');
-
-        if (! in_array($estado, ['Pendiente', 'Completada'], true)) {
-            return redirect()->back()->with('error', 'Selecciona un estado válido.');
-        }
-
-        $datos = [
-            'titulo' => $this->request->getPost('titulo'),
-            'descripcion' => $this->request->getPost('descripcion'),
-            'fecha_entrega' => $this->request->getPost('fecha_entrega'),
-            'estado' => $estado,
-        ];
-
-        $modelo->update($id, $datos);
-
-        return redirect()->to(site_url('tareas'));
+    if (! $tarea) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
+            'Tarea no encontrada'
+        );
     }
+
+    $datos = [
+        'titulo'        => trim((string) $this->request->getPost('titulo')),
+        'descripcion'   => trim((string) $this->request->getPost('descripcion')),
+        'fecha_entrega' => (string) $this->request->getPost('fecha_entrega'),
+        'estado'        => (string) $this->request->getPost('estado'),
+    ];
+
+    $reglas = [
+        'titulo'        => 'required|max_length[100]',
+        'descripcion'   => 'required',
+        'fecha_entrega' => 'required|valid_date[Y-m-d]',
+        'estado'        => 'required|in_list[Pendiente,Completada]',
+    ];
+
+    if (! $this->validateData($datos, $reglas)) {
+        return redirect()->back()
+            ->withInput()
+            ->with('errores', $this->validator->getErrors());
+    }
+
+    if ($modelo->update($id, $datos) === false) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'No se pudo actualizar la tarea.');
+    }
+
+    return redirect()->to(site_url('tareas'));
+}
 
     public function eliminar($id)
     {

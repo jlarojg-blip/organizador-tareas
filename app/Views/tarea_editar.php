@@ -12,6 +12,25 @@
     <main class="container mt-5">
 <h1 data-es="Editar tarea" data-en="Edit task">Editar tarea</h1>
 
+<h1 data-es="Nueva tarea" data-en="New task">Nueva tarea</h1>
+
+<?php if ($error = session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger"><?= esc($error) ?></div>
+<?php endif; ?>
+
+<?php if ($errores = session()->getFlashdata('errores')): ?>
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            <?php foreach ($errores as $mensaje): ?>
+                <li><?= esc($mensaje) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<div class="card tarjeta-formulario">
+    <div class="card-body">
+
 <div class="card tarjeta-formulario">
     <div class="card-body">
 <form action="<?= site_url('tareas/actualizar/' . $tarea['id']) ?>" method="post">
@@ -45,13 +64,13 @@
 
     <select id="estado" name="estado" class="form-select" required>
         <option value="Pendiente"
-                <?= $tarea['estado'] === 'Pendiente' ? 'selected' : '' ?>
-                data-es="Pendiente" data-en="Pending">
+<?= old('estado', $tarea['estado']) === 'Pendiente' ? 'selected' : '' ?>
+        data-es="Pendiente" data-en="Pending">
             Pendiente
         </option>
         <option value="Completada"
-                <?= $tarea['estado'] === 'Completada' ? 'selected' : '' ?>
-                data-es="Completada" data-en="Completed">
+<?= old('estado', $tarea['estado']) === 'Completada' ? 'selected' : '' ?>
+        data-es="Completada" data-en="Completed">
             Completada
         </option>
     </select>
