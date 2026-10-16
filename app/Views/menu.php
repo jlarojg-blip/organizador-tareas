@@ -46,6 +46,7 @@
 <?= view('idioma_mensajes') ?>
 
 
+
 <script>
 function cambiarIdioma(idioma) {
     const elegido = idioma === 'en' ? 'en' : 'es';
@@ -57,6 +58,14 @@ function cambiarIdioma(idioma) {
 
     document.querySelectorAll('[data-es][data-en]').forEach(function (elemento) {
         elemento.textContent = elemento.getAttribute('data-' + elegido);
+    });
+
+    document.querySelectorAll('[data-alt-es][data-alt-en]').forEach(function (elemento) {
+        elemento.setAttribute('alt', elemento.getAttribute('data-alt-' + elegido));
+    });
+
+    document.querySelectorAll('[data-aria-es][data-aria-en]').forEach(function (elemento) {
+        elemento.setAttribute('aria-label', elemento.getAttribute('data-aria-' + elegido));
     });
 }
 
