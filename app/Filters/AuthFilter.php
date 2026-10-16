@@ -27,9 +27,27 @@ class AuthFilter implements FilterInterface
      */
    public function before(RequestInterface $request, $arguments = null)
 {
-    if (session()->get('logueado')) {
-        return;
+
+
+if (session()->get('logueado')) {
+    $usuarios = new UsuarioModel();
+    $usuario = $usuarios->find(session()->get('usuario_id'));
+
+    if (! $usuario || (int) $usuario['activo'] !== 1) {
+        session()->destroy();
+
+        return redirect()->to(site_url('login'))
+            ->deleteCookie('recordarme');
     }
+
+    session()->set([
+        'usuario_nombre' => $usuario['nombre'],
+        'administrador'  => (int) $usuario['administrador'],
+        'profesor'       => (int) $usuario['profesor'],
+    ]);
+
+    return;
+}
 
     $cookie = $request->getCookie('recordarme');
 
