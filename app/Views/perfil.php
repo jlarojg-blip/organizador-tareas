@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-es="Mi perfil" data-en="My profile">Mi perfil</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
     <?= view('menu') ?>

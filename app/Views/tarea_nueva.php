@@ -6,6 +6,7 @@
 
     <title data-es="Nueva tarea" data-en="New task">Nueva tarea</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
     <?= view('menu') ?>
@@ -13,7 +14,9 @@
     <main class="container mt-5">
 <h1 data-es="Nueva tarea" data-en="New task">Nueva tarea</h1>
 
-   <form action="<?= site_url('tareas/guardar') ?>" method="post">
+   <div class="card tarjeta-formulario">
+    <div class="card-body">
+<form action="<?= site_url('tareas/guardar') ?>" method="post">
     <?= csrf_field() ?>
             <div class="mb-3">
 
@@ -44,6 +47,8 @@
     Volver
 </a>
         </form>
+    </div>
+</div>
     </main>
 </body>
 </html>

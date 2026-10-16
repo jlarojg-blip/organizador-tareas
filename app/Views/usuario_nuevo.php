@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title data-es="Nuevo usuario" data-en="New user">Nuevo usuario</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
     <?= view('menu') ?>
@@ -21,7 +22,9 @@
             </div>
         <?php endif; ?>
 
-        <form action="<?= site_url('usuarios/crear') ?>" method="post">
+        <div class="card tarjeta-formulario">
+    <div class="card-body">
+<form action="<?= site_url('usuarios/crear') ?>" method="post">
             <?= csrf_field() ?>
 
             <div class="mb-3">
@@ -77,6 +80,8 @@
             <button type="submit" class="btn btn-primary" data-es="Crear usuario" data-en="Create user">Crear usuario</button>
             <a href="<?= site_url('usuarios') ?>" class="btn btn-secondary" data-es="Cancelar" data-en="Cancel">Cancelar</a>
         </form>
+    </div>
+</div>
     </main>
 </body>
 </html>

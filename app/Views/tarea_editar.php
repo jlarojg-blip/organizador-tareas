@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-es="Editar tarea" data-en="Edit task">Editar tarea</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
     <?= view('menu') ?>
     <main class="container mt-5">
 <h1 data-es="Editar tarea" data-en="Edit task">Editar tarea</h1>
 
+<div class="card tarjeta-formulario">
+    <div class="card-body">
 <form action="<?= site_url('tareas/actualizar/' . $tarea['id']) ?>" method="post">
     <?= csrf_field() ?>
         <div class="mb-3">
@@ -65,6 +68,8 @@
 </a>
 
         </form>
+    </div>
+</div>
     </main>
 </body>
 </html>

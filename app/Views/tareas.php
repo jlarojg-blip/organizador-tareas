@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title data-es="Tareas" data-en="Tasks">Tareas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
     <?= view('menu') ?>
@@ -77,12 +78,7 @@
                                     </a>
                                 </td>
                                 <td><?= esc($tarea['fecha_entrega']) ?></td>
-                                <td
-                                    data-es="<?= esc($tarea['estado'], 'attr') ?>"
-                                    data-en="<?= $tarea['estado'] === 'Completada' ? 'Completed' : 'Pending' ?>"
-                                >
-                                    <?= esc($tarea['estado']) ?>
-                                </td>
+                                <td><span class="estado-tarea <?= $tarea['estado'] === 'Completada' ? 'estado-completada' : 'estado-pendiente' ?>" data-es="<?= esc($tarea['estado'], 'attr') ?>" data-en="<?= $tarea['estado'] === 'Completada' ? 'Completed' : 'Pending' ?>"><?= esc($tarea['estado']) ?></span></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

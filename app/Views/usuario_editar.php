@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title data-es="Editar usuario" data-en="Edit user">Editar usuario</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
     <?= view('menu') ?>
@@ -25,7 +26,9 @@
     </div>
 <?php endif; ?>
 
-        <form action="<?= site_url('usuarios/actualizar/' . $usuario['id']) ?>" method="post">
+        <div class="card tarjeta-formulario">
+    <div class="card-body">
+<form action="<?= site_url('usuarios/actualizar/' . $usuario['id']) ?>" method="post">
             <?= csrf_field() ?>
 
             <div class="mb-3">
@@ -107,6 +110,8 @@
             <button type="submit" class="btn btn-primary" data-es="Guardar cambios" data-en="Save changes">Guardar cambios</button>
             <a href="<?= site_url('usuarios/' . $usuario['id']) ?>" class="btn btn-secondary" data-es="Cancelar" data-en="Cancel">Cancelar</a>
         </form>
+    </div>
+</div>
     </main>
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title data-es="Detalle de tarea" data-en="Task details">Detalle de tarea</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
     <?= view('menu') ?>
@@ -56,7 +57,7 @@
 
                 <p class="mb-0">
                     <strong data-es="Estado:" data-en="Status:">Estado:</strong>
-                    <span
+                    <span class="estado-tarea <?= $tarea['estado'] === 'Completada' ? 'estado-completada' : 'estado-pendiente' ?>"
                         data-es="<?= esc($tarea['estado'], 'attr') ?>"
                         data-en="<?= $tarea['estado'] === 'Completada' ? 'Completed' : 'Pending' ?>"
                     >
