@@ -1,6 +1,16 @@
 <script>
 function traducirMensajes(idioma) {
     const traducciones = {
+                'No puedes eliminar tu propia cuenta.':
+            'You cannot delete your own account.',
+        'No se pudo eliminar el usuario.':
+            'The user could not be deleted.',
+        'Usuario eliminado correctamente.':
+            'User deleted successfully.',
+        'No se pudo guardar la tarea.':
+            'The task could not be saved.',
+        'No se pudo actualizar la tarea.':
+            'The task could not be updated.',
         'No se pudo enviar el correo de activación.':
             'The activation email could not be sent.',
         'Revisa tu correo y activa tu cuenta antes de iniciar sesión.':
@@ -48,6 +58,9 @@ function traducirMensajes(idioma) {
         'No tienes permisos para acceder a esta sección.':
             'You do not have permission to access this section.'
     };
+
+            [/The (.+?) field must contain a valid date\./g,
+            'El campo $1 debe contener una fecha válida.'],
 
     document.querySelectorAll('.alert, .alert li').forEach(function (elemento) {
         // Conserva las listas de errores y las traducciones ya agregadas.

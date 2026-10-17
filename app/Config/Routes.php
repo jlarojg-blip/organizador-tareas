@@ -27,6 +27,9 @@ $routes->get('usuarios/editar/(:num)', 'Usuarios::editar/$1', ['filter' => ['aut
 $routes->post('usuarios/actualizar/(:num)', 'Usuarios::actualizar/$1', ['filter' => ['auth', 'admin']]);
 $routes->get('usuarios/nuevo', 'Usuarios::nuevo', ['filter' => ['auth', 'admin']]);
 $routes->post('usuarios/crear', 'Usuarios::crear', ['filter' => ['auth', 'admin']]);
+$routes->post('usuarios/eliminar/(:num)', 'Usuarios::eliminar/$1', [
+    'filter' => ['auth', 'admin'],
+]);
 $routes->post('logout', 'Home::logout');
 $routes->get('recuperar-clave', 'Home::recuperarClave');
 $routes->post('recuperar-clave/enviar', 'Home::enviarInstrucciones');

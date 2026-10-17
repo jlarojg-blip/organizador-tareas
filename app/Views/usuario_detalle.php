@@ -12,6 +12,11 @@
     <main class="container py-4">
         <h1 class="mb-4" data-es="Detalle de usuario" data-en="User details">Detalle de usuario</h1>
 
+<?php if ($error = session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger"><?= esc($error) ?></div>
+<?php endif; ?>
+
+
         <?php if ($mensaje = session()->getFlashdata('mensaje')): ?>
     <div class="alert alert-success"><?= esc($mensaje) ?></div>
 <?php endif; ?>
@@ -23,6 +28,25 @@
 <a href="<?= site_url('usuarios') ?>" class="btn btn-secondary" data-es="Volver a usuarios" data-en="Back to users">
     Volver a usuarios
 </a>
+
+
+<?php if ((int) $usuario['id'] !== (int) session()->get('usuario_id')): ?>
+    <form
+        action="<?= site_url('usuarios/eliminar/' . $usuario['id']) ?>"
+        method="post"
+        class="d-inline"
+        onsubmit="return confirm(document.documentElement.lang === 'en'
+            ? 'Delete this user? Their access will be blocked.'
+            : '¿Eliminar este usuario? Se bloqueará su acceso.')"
+    >
+        <?= csrf_field() ?>
+        <button type="submit" class="btn btn-outline-danger"
+                data-es="Eliminar usuario" data-en="Delete user">
+            Eliminar usuario
+        </button>
+    </form>
+<?php endif; ?>
+
 
         <div class="card mb-3">
             <div class="card-body">

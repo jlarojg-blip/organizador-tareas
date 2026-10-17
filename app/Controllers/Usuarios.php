@@ -172,4 +172,31 @@ public function crear()
         ->with('mensaje', 'Usuario creado correctamente.');
 }
 
+public function eliminar($id)
+{
+    $id = (int) $id;
+
+    if ($id === (int) session()->get('usuario_id')) {
+        return redirect()->to(site_url('usuarios/' . $id))
+            ->with('error', 'No puedes eliminar tu propia cuenta.');
+    }
+
+    $modelo = new UsuarioModel();
+    $usuario = $modelo->find($id);
+
+    if (! $usuario) {
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
+            'Usuario no encontrado'
+        );
+    }
+
+    if (! $modelo->delete($id)) {
+        return redirect()->to(site_url('usuarios/' . $id))
+            ->with('error', 'No se pudo eliminar el usuario.');
+    }
+
+    return redirect()->to(site_url('usuarios'))
+        ->with('mensaje', 'Usuario eliminado correctamente.');
+}
+
 }
