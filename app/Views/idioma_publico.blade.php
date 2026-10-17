@@ -9,7 +9,7 @@
     </button>
 </div>
 
-<?= view('idioma_mensajes') ?>
+@include('idioma_mensajes')
 <script>
 function cambiarIdioma(idioma) {
     traducirMensajes(idioma);

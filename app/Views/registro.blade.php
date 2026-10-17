@@ -53,6 +53,6 @@
     </main>
 
 
-    <?= view('idioma_publico') ?>
+    @include('idioma_publico')
 </body>
 </html>

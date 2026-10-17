@@ -22,14 +22,14 @@ public function index()
         ->orderBy('tareas.id', $orden)
         ->findAll();
 
-    return view('tareas', [
+    return (new \App\Libraries\Blade())->render('tareas', [
         'tareas' => $tareas,
     ]);
 }
 
     public function nueva()
     {
-        return view('tarea_nueva');
+        return (new \App\Libraries\Blade())->render('tarea_nueva');
     }
 
    public function guardar()
@@ -82,7 +82,7 @@ public function detalle($id)
         );
     }
 
-    return view('tarea_detalle', ['tarea' => $tarea]);
+    return (new \App\Libraries\Blade())->render('tarea_detalle', ['tarea' => $tarea]);
 }
 
     public function editar($id)
@@ -96,7 +96,7 @@ public function detalle($id)
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Tarea no encontrada');
         }
 
-        return view('tarea_editar', ['tarea' => $tarea]);
+        return (new \App\Libraries\Blade())->render('tarea_editar', ['tarea' => $tarea]);
     }
 
 

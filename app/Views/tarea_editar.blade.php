@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
-    <?= view('menu') ?>
+    @include('menu')
     <main class="container mt-5">
 <h1 data-es="Editar tarea" data-en="Edit task">Editar tarea</h1>
 

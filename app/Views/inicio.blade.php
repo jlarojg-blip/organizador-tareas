@@ -7,11 +7,11 @@
         Organizador de tareas
     </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.8/dist/brite/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
+    <link rel="stylesheet" href={{ base_url('css/estilos.css') }}
 </head>
 <body>
     <?php if (session()->get('logueado')): ?>
-        <?= view('menu') ?>
+        @include('menu')
     <?php else: ?>
         <nav class="navbar">
             <div class="container">
@@ -72,7 +72,7 @@
     </main>
 
     <?php if (! session()->get('logueado')): ?>
-        <?= view('idioma_publico') ?>
+        @include('idioma_publico')
     <?php endif; ?>
 </body>
 </html>

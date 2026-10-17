@@ -43,7 +43,7 @@
     </div>
 </nav>
 
-<?= view('idioma_mensajes') ?>
+@include('idioma_mensajes')
 
 
 

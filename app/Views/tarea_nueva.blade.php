@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
-    <?= view('menu') ?>
+    @include('menu')
 
     <main class="container mt-5">
 <h1 data-es="Nueva tarea" data-en="New task">Nueva tarea</h1>

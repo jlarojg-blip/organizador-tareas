@@ -22,7 +22,7 @@ class Usuarios extends BaseController
             ->orderBy('id', $direccion)
             ->findAll();
 
-        return view('usuarios', [
+        return (new \App\Libraries\Blade())->render('usuarios', [
             'usuarios' => $usuarios,
             'orden'    => $orden,
         ]);
@@ -42,7 +42,7 @@ class Usuarios extends BaseController
         );
     }
 
-    return view('usuario_detalle', [
+    return (new \App\Libraries\Blade())->render('usuario_detalle', [
         'usuario' => $usuario,
     ]);
 }
@@ -61,7 +61,7 @@ public function editar($id)
         );
     }
 
-    return view('usuario_editar', [
+    return (new \App\Libraries\Blade())->render('usuario_editar', [
         'usuario' => $usuario,
     ]);
 }
@@ -136,7 +136,7 @@ if ($contrasena !== '' || $confirmarContrasena !== '') {
 
 public function nuevo()
 {
-    return view('usuario_nuevo');
+    return (new \App\Libraries\Blade())->render('usuario_nuevo');
 }
 
 public function crear()

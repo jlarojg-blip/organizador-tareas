@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?= base_url('css/estilos.css') ?>">
 </head>
 <body>
-    <?= view('menu') ?>
+    @include('menu')
     <main class="container py-4">
         <h1 class="mb-4" data-es="Editar perfil" data-en="Edit profile">Editar perfil</h1>
 

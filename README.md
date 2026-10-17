@@ -1,4 +1,4 @@
-# Organizador de tareas escolares
+/# Organizador de tareas escolares
 
 Aplicación web desarrollada con CodeIgniter 4, PHP, MariaDB y Bootswatch Brite.
 
@@ -129,3 +129,16 @@ Las fotos subidas, las sesiones y los registros de ejecución tampoco se version
 Las migraciones crean la estructura; los datos de una instalación existente requieren un respaldo de MariaDB.
 
 El repositorio de GitHub contiene el código. Para ejecutar la aplicación se necesita un servidor PHP y MariaDB.
+
+
+## Motor de vistas Blade
+
+Las plantillas se encuentran en `app/Views` con extensión `.blade.php`.
+Los controladores las renderizan mediante la clase `App\Libraries\Blade`,
+utilizando los componentes `illuminate/view` e `illuminate/events`.
+
+Los fragmentos compartidos se cargan con `@include`.
+Las plantillas conservan código PHP compatible con Blade.
+
+Las vistas compiladas se generan automáticamente en `writable/cache/blade`
+y no deben incluirse en Git.

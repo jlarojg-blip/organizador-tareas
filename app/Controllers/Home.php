@@ -7,18 +7,18 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('inicio');
+        return (new \App\Libraries\Blade())->render('inicio');
     }
 
 
         public function login(): string
     {
-        return view('login');
+        return (new \App\Libraries\Blade())->render('login');
     }
 
     public function registro(): string
     {
-        return view('registro');
+        return (new \App\Libraries\Blade())->render('registro');
     }
 
 public function guardarRegistro()
@@ -164,7 +164,7 @@ public function logout()
 
 public function recuperarClave(): string
 {
-    return view('recuperar_clave');
+    return (new \App\Libraries\Blade())->render('recuperar_clave');
 }
 
 public function enviarInstrucciones()
@@ -221,7 +221,7 @@ public function restablecerClave($codigo)
             ->with('error', 'El enlace de recuperación no es válido o ya venció.');
     }
 
-    return view('restablecer_clave', [
+    return (new \App\Libraries\Blade())->render('restablecer_clave', [
         'codigo' => $codigo,
     ]);
 }
@@ -296,7 +296,7 @@ public function perfil()
         return redirect()->to(site_url('login'));
     }
 
-    return view('perfil', ['usuario' => $usuario]);
+    return (new \App\Libraries\Blade())->render('perfil', ['usuario' => $usuario]);
 }
 
 public function editarPerfil()
@@ -310,7 +310,7 @@ public function editarPerfil()
         return redirect()->to(site_url('login'));
     }
 
-    return view('editar_perfil', ['usuario' => $usuario]);
+    return (new \App\Libraries\Blade())->render('editar_perfil', ['usuario' => $usuario]);
 }
 
 public function actualizarPerfil()
